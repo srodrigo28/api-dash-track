@@ -9,6 +9,9 @@ export const pool = new Pool({
   user: 'postgres',
   password: 'password',
   database: 'financeapp',
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 5000,
 });
 
 console.log('Pool do PostgreSQL criado');
