@@ -1,10 +1,12 @@
-import express from 'express'
+// index.js (versão “mínima viável” que você queria)
+import express from 'express';
+import { pool } from './src/db/postgres/client.js';
 
-const app = express()
+const app = express();
 
-app.get('/', (req, res) => {
-    res.send('hello world')
+app.get('/', async (req, res) => {
+  const { rows } = await pool.query('SELECT * FROM users');
+  res.send(rows);                    // manda o array direto (o Express já faz JSON.stringify)
+});
 
-})
-
-app.listen(3000, () => console.log('listening on port 3000'))
+app.listen(3000, () => console.log('http://localhost:3000'));

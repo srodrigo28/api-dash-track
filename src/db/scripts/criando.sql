@@ -1,6 +1,6 @@
-CREATE DATABASE test;
+CREATE DATABASE financesapp;
 
-use test;
+use financesapp;
 
 CREATE TABLE users(id varchar(50) PRIMARY KEY, name varchar(50) );
 
