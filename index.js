@@ -1,14 +1,15 @@
 // index.js (versão “mínima viável” que você queria)
 import express from 'express';
-import { pool } from './src/db/postgres/client.js';
+import 'dotenv/config.js';
+
+
+import { PostgresHelper } from './src/db/postgres/helper.js';
 
 const app = express();
 
-app.get('/users', async (req, res) => {
-  const client = await pool.connect()
-  const results = await client.query('SELECT * FROM users');
-  // manda o array direto (o Express já faz JSON.stringify)
-  res.send(JSON.stringify(results.rows)); 
+app.get('/users', async (_, res) => {
+  const results = await PostgresHelper.query('SELECT * FROM users;');
+  res.send(JSON.stringify(results)); 
 });
 
 app.listen(3000, () => console.log('http://localhost:3000'));
