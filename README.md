@@ -21,6 +21,16 @@ src/db/postgres/migrations/exec.js
 src/db/postgres/migrations/01-init.sql
 src/db/postgres/migrations/02-init.sql
 
+#### Post users
+```
+{
+  "first_name": "Janaina",
+  "last_name": "Silva",
+  "email": "janaina@outlook.com",
+  "password": "123123"
+}
+```
+
 #### Rotas do projeto
 
 http://localhost:3000/
