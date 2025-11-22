@@ -31,6 +31,9 @@ src/db/postgres/migrations/02-init.sql
 }
 ```
 
+#### Get User/:userId
+http://localhost:8000/api/users/3bbcc038-b1fe-413c-b4f8-ade86b2588cb
+
 #### Rotas do projeto
 
 http://localhost:3000/
