@@ -16,3 +16,6 @@ npm i uuid
 
 * criptografar senha
 npm i bcrypt
+
+* aux validar email 
+npm i validator

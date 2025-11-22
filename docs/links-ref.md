@@ -8,7 +8,7 @@ https://app.diagrams.net/
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
 * github
-
+https://github.com/felipemotarocha/fullstackclub-finance-dashboard-api
 
 * Documentação Jest 30
 https://jestjs.io/docs/getting-started
