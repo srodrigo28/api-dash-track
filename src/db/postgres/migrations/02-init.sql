@@ -1,0 +1,47 @@
+-- ./src/db/postgres/migrations/02.init.sql
+
+-- Apaga as tabelas antigas (só em desenvolvimento!)
+DROP TABLE IF EXISTS transactions CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TYPE IF EXISTS transaction_type CASCADE;
+
+-- 0. Extensão para gen_random_uuid()
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+-- 1. Tabela de usuários
+CREATE TABLE IF NOT EXISTS users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 2. Cria o tipo ENUM corretamente (a parte que estava totalmente errada)
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'transaction_type') THEN
+        CREATE TYPE transaction_type AS ENUM ('EARNING', 'EXPENSE', 'INVESTMENT');
+    END IF;
+END$$;
+
+-- 3. Tabela de transações
+CREATE TABLE IF NOT EXISTS transactions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    
+    name VARCHAR(100) NOT NULL,
+    date DATE NOT NULL DEFAULT CURRENT_DATE,
+    amount NUMERIC(12, 2) NOT NULL,
+    type transaction_type NOT NULL,
+    
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 4. Índices para performance
+CREATE INDEX IF NOT EXISTS idx_transactions_user_id ON transactions(user_id);
+CREATE INDEX IF NOT EXISTS idx_transactions_date    ON transactions(date);
+CREATE INDEX IF NOT EXISTS idx_transactions_type   ON transactions(type);

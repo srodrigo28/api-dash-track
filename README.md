@@ -11,5 +11,19 @@
 #### Rodar o projeto
 node index.js
 
-### Rotas do projeto
+#### rodar a migration
+npm run migrations
+node index.js
+
+#### onde esta configurado a migration
+src/db/postgres/migrations/exec.js
+
+src/db/postgres/migrations/01-init.sql
+src/db/postgres/migrations/02-init.sql
+
+#### Rotas do projeto
+
 http://localhost:3000/
+
+* Post
+http://localhost:8000/api/users

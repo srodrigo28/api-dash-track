@@ -1,4 +1,4 @@
-// src/db/index.js
+// src/db/helper.js
 import pg from 'pg';
 
 const { Pool } = pg;

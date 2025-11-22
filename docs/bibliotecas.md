@@ -10,3 +10,9 @@ npm i pg
 
 * a partir do nodejs 20 já vem por default
 npm i dotenv
+
+* gerar id
+npm i uuid
+
+* criptografar senha
+npm i bcrypt
